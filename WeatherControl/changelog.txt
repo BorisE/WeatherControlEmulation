@@ -1,0 +1,12 @@
+﻿WeatherControl Emulation
+Copyright by Emchenko Boris 2017
+http://astromania.info
+
+to do:
+- ?
+
+
+1.0.1 [12.08.17]
+- Вторая боевая версия
+- Предустановленные настройки для Good/Bad
+- Диалог About
