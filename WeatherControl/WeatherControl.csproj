@@ -28,14 +28,14 @@
     <UpdateUrl>http://astromania.info/weather_control/</UpdateUrl>
     <SupportUrl>http://astromania.info</SupportUrl>
     <TargetCulture>en</TargetCulture>
-    <ProductName>Weather controller</ProductName>
+    <ProductName>WeatherControl emulation</ProductName>
     <PublisherName>Astromania.info</PublisherName>
     <SuiteName>Observatory Conrol</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>wcinstall.htm</WebPage>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>3</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -119,6 +119,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingsClass.cs" />
     <Compile Include="Utils.cs" />
+    <Content Include="changelog.txt" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

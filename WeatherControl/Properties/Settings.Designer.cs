@@ -25,7 +25,7 @@ namespace WeatherControl.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"{""Bolt_date"":"""",""Bolt_time"":"""",""TempUnits"":""C"",""WindSpeedUnits"":""K"",""Bolt_SkyTemp"":30,""Bolt_Temp"":10,""Bolt_SensorTemp"":10,""Bolt_WindSpeed"":2,""Bolt_Hum"":70,""Bolt_DewPoint"":-100,""Bolt_Heater"":30,""Bolt_RainFlag"":0,""Bolt_WetFlag"":0,""Bolt_SinceLastMeasure"":0,""Bolt_now"":0,""Bolt_CloudCond"":1,""Bolt_WindCond"":1,""Bolt_RainCond"":1,""Bolt_DaylighCond"":1,""Bolt_RoofCloseFlag"":0,""Bolt_AlertFlag"":0}")]
         public string GoodSettings {
             get {
                 return ((string)(this["GoodSettings"]));
@@ -37,7 +37,7 @@ namespace WeatherControl.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"{""Bolt_date"":"""",""Bolt_time"":"""",""TempUnits"":""C"",""WindSpeedUnits"":""K"",""Bolt_SkyTemp"":10,""Bolt_Temp"":10,""Bolt_SensorTemp"":10,""Bolt_WindSpeed"":20,""Bolt_Hum"":70,""Bolt_DewPoint"":-100,""Bolt_Heater"":30,""Bolt_RainFlag"":2,""Bolt_WetFlag"":2,""Bolt_SinceLastMeasure"":0,""Bolt_now"":0,""Bolt_CloudCond"":3,""Bolt_WindCond"":3,""Bolt_RainCond"":3,""Bolt_DaylighCond"":1,""Bolt_RoofCloseFlag"":1,""Bolt_AlertFlag"":1}")]
         public string BadSettings {
             get {
                 return ((string)(this["BadSettings"]));
