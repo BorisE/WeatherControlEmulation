@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace WeatherControl
 {
-    static class BoltwoodFileClass
+    public static class BoltwoodFileClass
     {
         public static string BoltwoodFileName = "cloudsensor.dat"; //cloud sensor file
         public static string BoltwoodFilePath = "";
