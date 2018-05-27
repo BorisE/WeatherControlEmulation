@@ -263,14 +263,14 @@ namespace WeatherControl
         private void btnWriteNow_Click(object sender, EventArgs e)
         {
             BoltwoodObj.SetMeasurement(); //update measured time
-            BoltwoodFileClass.WirteBoltwoodData(BoltwoodObj.getBoltwoodString());
+            BoltwoodFileClass.WriteBoltwoodData(BoltwoodObj.getBoltwoodString());
             txtLastWritten.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
         private void timerBolwoodWrite_Tick(object sender, EventArgs e)
         {
             BoltwoodObj.SetMeasurement(); //update measured time
-            BoltwoodFileClass.WirteBoltwoodData(BoltwoodObj.getBoltwoodString());
+            BoltwoodFileClass.WriteBoltwoodData(BoltwoodObj.getBoltwoodString());
             txtLastWritten.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
 

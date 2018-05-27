@@ -53,7 +53,7 @@ namespace WeatherControl
             BoltwoodFile = null;
         }
 
-        public static void WirteBoltwoodData(string dataline)
+        public static void WriteBoltwoodData(string dataline)
         {
             if (BoltwoodFile == null)
             {

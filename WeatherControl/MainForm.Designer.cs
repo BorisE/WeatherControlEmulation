@@ -198,7 +198,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.label24);
             this.groupBox1.Controls.Add(this.label23);
             this.groupBox1.Controls.Add(this.comboBoxWetFlag);
@@ -254,7 +253,7 @@
             this.groupBox3.Controls.Add(this.txtSinceLastWet);
             this.groupBox3.Controls.Add(this.chkWetNow);
             this.groupBox3.Controls.Add(this.chkRainNow);
-            this.groupBox3.Location = new System.Drawing.Point(879, 23);
+            this.groupBox3.Location = new System.Drawing.Point(775, 287);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(305, 113);
             this.groupBox3.TabIndex = 13;
@@ -832,6 +831,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1169, 486);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.txtDebug);
             this.Controls.Add(this.chkBadConditions);
             this.Controls.Add(this.chkGoodConditions);
