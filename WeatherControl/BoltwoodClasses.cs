@@ -251,6 +251,8 @@ namespace WeatherControl
 
         public decimalSeparatorType ForcedDecimalSeparator = decimalSeparatorType.useLocale; //decimal separator
 
+        public BoltwoodFileClass FileOperations = new BoltwoodFileClass();
+
         /// <summary>
         /// Configuration block with constants and parameters
         /// </summary>
@@ -325,7 +327,7 @@ namespace WeatherControl
             set
             {
                 Bolt_SkyTemp = value;
-                SetMeasurement();
+                UpdateMeasurementTime();
             }
         }
 
@@ -335,7 +337,7 @@ namespace WeatherControl
             set
             {
                 Bolt_Temp = value;
-                SetMeasurement();
+                UpdateMeasurementTime();
             }
         }
 
@@ -345,7 +347,7 @@ namespace WeatherControl
             set
             {
                 Bolt_SensorTemp = value;
-                SetMeasurement();
+                UpdateMeasurementTime();
             }
         }
 
@@ -355,7 +357,7 @@ namespace WeatherControl
             set
             {
                 Bolt_WindSpeed = value;
-                SetMeasurement();
+                UpdateMeasurementTime();
             }
         }
 
@@ -365,7 +367,7 @@ namespace WeatherControl
             set
             {
                 Bolt_Hum = value;
-                SetMeasurement();
+                UpdateMeasurementTime();
             }
         }
 
@@ -384,7 +386,7 @@ namespace WeatherControl
             set
             {
                 Bolt_Heater = value;
-                SetMeasurement();
+                UpdateMeasurementTime();
             }
         }
         #endregion
@@ -403,7 +405,7 @@ namespace WeatherControl
                 {
                     Bolt_RainFlag_LastDetected = DateTime.Now;
                 }
-                SetMeasurement();
+                UpdateMeasurementTime();
             }
         }
 
@@ -420,7 +422,7 @@ namespace WeatherControl
                 {
                     Bolt_WetFlag_LastDetected = DateTime.Now;
                 }
-                SetMeasurement();
+                UpdateMeasurementTime();
             }
         }
 
@@ -512,7 +514,7 @@ namespace WeatherControl
                         Bolt_RainFlag_LastDetected = DateTime.Now.AddSeconds(-TimeLimit_LastMinute - 1); //override date to the nearest valid past
                     }
                 }
-                SetMeasurement();
+                UpdateMeasurementTime();
             }
         }
 
@@ -544,7 +546,7 @@ namespace WeatherControl
                         Bolt_WetFlag_LastDetected = DateTime.Now.AddSeconds(-TimeLimit_LastMinute - 1); //override date to the nearest valid past
                     }
                 }
-                SetMeasurement();
+                UpdateMeasurementTime();
             }
         }
 
@@ -597,7 +599,7 @@ namespace WeatherControl
                     }
                         
                 }
-                SetMeasurement();
+                UpdateMeasurementTime();
             }
         }
         #endregion
@@ -636,7 +638,7 @@ namespace WeatherControl
             set
             {
                 Bolt_DaylighCond = value;
-                SetMeasurement();
+                UpdateMeasurementTime();
             }
         }
 
@@ -664,7 +666,7 @@ namespace WeatherControl
                         Bolt_SkyTemp = Bolt_Temp - (CLOUDINDEX_CLOUDY_BAD-10);
                     }
                 }
-                SetMeasurement();
+                UpdateMeasurementTime();
             }
         }
 
@@ -673,7 +675,7 @@ namespace WeatherControl
             set
             {
                 Bolt_WindCond = value;
-                SetMeasurement();
+                UpdateMeasurementTime();
             }
         }
         #endregion
@@ -688,7 +690,7 @@ namespace WeatherControl
             set
             {
                 Bolt_RoofCloseFlag = value;
-                SetMeasurement();
+                UpdateMeasurementTime();
             }
         }
 
@@ -701,7 +703,7 @@ namespace WeatherControl
             set
             {
                 Bolt_AlertFlag = value;
-                SetMeasurement();
+                UpdateMeasurementTime();
             }
         }
         #endregion
@@ -756,7 +758,7 @@ namespace WeatherControl
         /// <summary>
         /// Write down the moment of measurement
         /// </summary>
-        public void SetMeasurement()
+        public void UpdateMeasurementTime()
         {
             LastMeasure = DateTime.Now;
         }

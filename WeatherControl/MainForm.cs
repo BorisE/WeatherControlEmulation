@@ -134,7 +134,7 @@ namespace WeatherControl
             ignoreEvents = false;
 
             //Saved 
-            txtFilePath.Text = (BoltwoodFileClass.BoltwoodFilePath == "" ? BoltwoodFileClass.DefaultFilePath : BoltwoodFileClass.BoltwoodFilePath) + BoltwoodFileClass.BoltwoodFileName;
+            txtFilePath.Text = Path.Combine((BoltwoodObj.FileOperations.BoltwoodFilePath == "" ? BoltwoodObj.FileOperations.DefaultFilePath : BoltwoodObj.FileOperations.BoltwoodFilePath), BoltwoodObj.FileOperations.BoltwoodFileName);
 
             //Dump log just in case
             logTimer.Enabled = true;
@@ -286,16 +286,16 @@ namespace WeatherControl
         #region Write File commands
         private void btnWriteNow_Click(object sender, EventArgs e)
         {
-            BoltwoodObj.SetMeasurement(); //update measured time
-            BoltwoodFileClass.WriteBoltwoodData(BoltwoodObj.getBoltwoodString());
+            BoltwoodObj.UpdateMeasurementTime(); //update measured time
+            BoltwoodObj.FileOperations.WriteBoltwoodData(BoltwoodObj.getBoltwoodString());
             txtLastWritten.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             Logging.AddLog("Boltwood file updated on demand", LogLevel.Activity);
         }
 
         private void timerBolwoodWrite_Tick(object sender, EventArgs e)
         {
-            BoltwoodObj.SetMeasurement(); //update measured time
-            BoltwoodFileClass.WriteBoltwoodData(BoltwoodObj.getBoltwoodString());
+            BoltwoodObj.UpdateMeasurementTime(); //update measured time
+            BoltwoodObj.FileOperations.WriteBoltwoodData(BoltwoodObj.getBoltwoodString());
             txtLastWritten.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
@@ -468,18 +468,18 @@ namespace WeatherControl
         private void btnFileDialog_Click(object sender, EventArgs e)
         {
             saveFileDialog1.Filter = "Файлы данных (*.txt; *.dat) | *.txt; *.dat";
-            saveFileDialog1.InitialDirectory = (BoltwoodFileClass.BoltwoodFilePath == "" ? BoltwoodFileClass.DefaultFilePath : BoltwoodFileClass.BoltwoodFilePath);
-            saveFileDialog1.FileName = BoltwoodFileClass.BoltwoodFileName;
+            saveFileDialog1.InitialDirectory = (BoltwoodObj.FileOperations.BoltwoodFilePath == "" ? BoltwoodObj.FileOperations.DefaultFilePath : BoltwoodObj.FileOperations.BoltwoodFilePath);
+            saveFileDialog1.FileName = BoltwoodObj.FileOperations.BoltwoodFileName;
             saveFileDialog1.DefaultExt = ".dat";
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string dialogFN = saveFileDialog1.FileName;
 
-                BoltwoodFileClass.BoltwoodFilePath = Path.GetDirectoryName(dialogFN) + Path.DirectorySeparatorChar;
-                BoltwoodFileClass.BoltwoodFileName = Path.GetFileName(dialogFN);
+                BoltwoodObj.FileOperations.BoltwoodFilePath = Path.GetDirectoryName(dialogFN) + Path.DirectorySeparatorChar;
+                BoltwoodObj.FileOperations.BoltwoodFileName = Path.GetFileName(dialogFN);
 
-                txtFilePath.Text = BoltwoodFileClass.BoltwoodFilePath + BoltwoodFileClass.BoltwoodFileName;
+                txtFilePath.Text = Path.Combine(BoltwoodObj.FileOperations.BoltwoodFilePath , BoltwoodObj.FileOperations.BoltwoodFileName);
             }
 
         }

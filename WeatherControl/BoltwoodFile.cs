@@ -9,15 +9,15 @@ using System.Windows.Forms;
 
 namespace WeatherControl
 {
-    public static class BoltwoodFileClass
+    public class BoltwoodFileClass
     {
-        public static string BoltwoodFileName = "cloudsensor.dat"; //cloud sensor file
-        public static string BoltwoodFilePath = "";
+        public string BoltwoodFileName = "cloudsensor.dat"; //cloud sensor file
+        public string BoltwoodFilePath = "";
 
-        private static TextWriter BoltwoodFile = null;
+        private TextWriter BoltwoodFile = null;
 
 
-        public static string DefaultFilePath
+        public string DefaultFilePath
         {
             get { return Environment.GetFolderPath(Environment.SpecialFolder.MyDocume‌​nts) + "\\"; }
         }
@@ -26,10 +26,10 @@ namespace WeatherControl
         /// Boltwood data storage procedures
         /// </summary>
         #region Boltwood data section
-        private static void OpenBoltwoodFile()
+        private void OpenBoltwoodFile()
         {
             if (BoltwoodFilePath == "") BoltwoodFilePath = DefaultFilePath;
-            string FullFileName = BoltwoodFilePath + BoltwoodFileName;
+            string FullFileName = Path.Combine(BoltwoodFilePath, BoltwoodFileName);
 
             try
             {
@@ -41,7 +41,7 @@ namespace WeatherControl
             }
         }
 
-        private static void CloseBoltwoodFile()
+        private void CloseBoltwoodFile()
         {
             try
             {
@@ -54,7 +54,7 @@ namespace WeatherControl
             BoltwoodFile = null;
         }
 
-        public static void WriteBoltwoodData(string dataline)
+        public void WriteBoltwoodData(string dataline)
         {
             if (BoltwoodFile == null)
             {
