@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LoggingLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -75,10 +76,24 @@ namespace WeatherControl
         }
         #endregion
 
+        internal const string ConfigName = "WeatherEmulation.config"; 
+        internal const string DefaultConfigName = "Docs//WeatherEmulation.defaultconfig.txt";
+        internal const string ConfigFolder = "WeatherEmulation";
+        internal const string LogFileNamePrefix = "boltwood_";
 
         public FormWeatherFileControl()
         {
             InitializeComponent();
+
+            //Init Logging and Config
+            string ProgDocumentFullPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), ConfigFolder);
+            ConfigManagement.InitConfig(ProgDocumentFullPath, ConfigName, DefaultConfigName);
+            Logging.InitLogging(ProgDocumentFullPath, LogFileNamePrefix, false); //set log folder and log file name
+
+            Logging.AddLog("****************************************************************************************", LogLevel.Activity);
+            Logging.AddLog("WeatherEmulation app started", LogLevel.Activity);
+            Logging.AddLog("****************************************************************************************", LogLevel.Activity);
+
             VersionData.initVersionData();
         }
 
@@ -120,6 +135,9 @@ namespace WeatherControl
 
             //Saved 
             txtFilePath.Text = (BoltwoodFileClass.BoltwoodFilePath == "" ? BoltwoodFileClass.DefaultFilePath : BoltwoodFileClass.BoltwoodFilePath) + BoltwoodFileClass.BoltwoodFileName;
+
+            //Dump log just in case
+            logTimer.Enabled = true;
         }
 
 
@@ -227,6 +245,9 @@ namespace WeatherControl
 
             //try { BoltwoodObj.WetFlag_DirectSet = (Enum_WetFlag)Enum.Parse(typeof(Enum_WetFlag), comboBoxWetFlag.SelectedItem.ToString()); } catch { };
             ignoreEvents = false;
+
+            Logging.AddLog("RainFlag changed to [" + comboBoxRainFlag.SelectedItem.ToString() + "]", LogLevel.Activity);
+
         }
 
         private void comboBoxWetFlag_SelectedIndexChanged(object sender, EventArgs e)
@@ -241,6 +262,8 @@ namespace WeatherControl
             comboBoxRainCond.SelectedItem = BoltwoodObj.RainCond.ToString();
 
             ignoreEvents = false;
+            Logging.AddLog("WetFlag changed to [" + comboBoxWetFlag.SelectedItem.ToString() + "]", LogLevel.Activity);
+
         }
 
         private void comboBoxRainCond_SelectedIndexChanged(object sender, EventArgs e)
@@ -256,6 +279,7 @@ namespace WeatherControl
             comboBoxWetFlag.SelectedItem = BoltwoodObj.WetFlag.ToString();
 
             ignoreEvents = false;
+            Logging.AddLog("RainCond changed to [" + comboBoxRainCond.SelectedItem.ToString() + "]", LogLevel.Activity);
         }
         #endregion
 
@@ -265,6 +289,7 @@ namespace WeatherControl
             BoltwoodObj.SetMeasurement(); //update measured time
             BoltwoodFileClass.WriteBoltwoodData(BoltwoodObj.getBoltwoodString());
             txtLastWritten.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            Logging.AddLog("Boltwood file updated on demand", LogLevel.Activity);
         }
 
         private void timerBolwoodWrite_Tick(object sender, EventArgs e)
@@ -286,12 +311,14 @@ namespace WeatherControl
                 timerBolwoodWrite.Enabled = true;
                 ((Button)sender).Text = "Стоп автозапись";
                 ((Button)sender).BackColor = OnColor;
+                Logging.AddLog("Autowriting Boltwood file started", LogLevel.Activity);
             }
             else
             {
                 timerBolwoodWrite.Enabled = false;
                 ((Button)sender).Text = "Старт автозапись";
                 ((Button)sender).BackColor = SystemColors.Control;
+                Logging.AddLog("Autowriting Boltwood file stoped", LogLevel.Activity);
             }
         }
         #endregion
@@ -333,6 +360,7 @@ namespace WeatherControl
                     string st2 = BoltwoodObj_GoodState.SerializeToJSON();
                     Properties.Settings.Default.GoodSettings = st2;
 
+                    Logging.AddLog("GOOD Conditions preset was saved", LogLevel.Activity);
 
                     //Отключить флаг "запись"
                     chkSaveConditions.Checked = false;
@@ -345,7 +373,7 @@ namespace WeatherControl
                     ((CheckBox)sender).Checked = false;
 
                 }
-                //Если нее был включен флаг запись, то переключить
+                //Если не был включен флаг запись, то переключить
                 else
                 {
                     // Переключить режим а ХОРОШИЕ условия
@@ -360,6 +388,7 @@ namespace WeatherControl
                     chkBadConditions.Checked = false;
                     chkBadConditions.BackColor = SystemColors.ButtonFace;
 
+                    Logging.AddLog("GOOD Conditions preset was activated", LogLevel.Activity);
                 }
             }
             //Если выключили
@@ -386,6 +415,8 @@ namespace WeatherControl
                     string st2 = BoltwoodObj_BadState.SerializeToJSON();
                     Properties.Settings.Default.BadSettings = st2;
 
+                    Logging.AddLog("BAD Conditions preset was saved", LogLevel.Activity);
+
                     //Отключить флаг "запись"
                     chkSaveConditions.Checked = false;
 
@@ -410,6 +441,8 @@ namespace WeatherControl
                     //Сбросить другую кнопку
                     chkGoodConditions.Checked = false;
                     chkGoodConditions.BackColor = SystemColors.ButtonFace;
+
+                    Logging.AddLog("BAD Conditions preset was activated", LogLevel.Activity);
                 }
             }
             //Если выключили
@@ -474,8 +507,12 @@ namespace WeatherControl
             string st2 = Properties.Settings.Default.BadSettings;
             BoltwoodObj_BadState.DeserializeFromJSON(st2);
 
-
+            Logging.AddLog("Settings loaded", LogLevel.Activity);
         }
 
+        private void logTimer_Tick(object sender, EventArgs e)
+        {
+            Logging.DumpToFile();
+        }
     }
 }

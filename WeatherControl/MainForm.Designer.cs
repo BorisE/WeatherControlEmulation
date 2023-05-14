@@ -34,6 +34,7 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnTimerControl = new System.Windows.Forms.Button();
             this.timerTime = new System.Windows.Forms.Timer(this.components);
+            this.logTimer = new System.Windows.Forms.Timer(this.components);
             this.btnWriteNow = new System.Windows.Forms.Button();
             this.timerBolwoodWrite = new System.Windows.Forms.Timer(this.components);
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
@@ -145,6 +146,12 @@
             this.timerTime.Enabled = true;
             this.timerTime.Interval = 1000;
             this.timerTime.Tick += new System.EventHandler(this.timerTime_Tick);
+            // 
+            // logTimer
+            // 
+            this.logTimer.Enabled = false;
+            this.logTimer.Interval = 5000;
+            this.logTimer.Tick += new System.EventHandler(this.logTimer_Tick);
             // 
             // btnWriteNow
             // 
@@ -932,6 +939,8 @@
         private System.Windows.Forms.TextBox txtSinceLastWet;
         private System.Windows.Forms.CheckBox chkWetNow;
         private System.Windows.Forms.CheckBox chkRainNow;
+        private System.Windows.Forms.Timer logTimer;
+
     }
 }
 
