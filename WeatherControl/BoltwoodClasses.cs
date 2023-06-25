@@ -236,7 +236,7 @@ namespace WeatherControl
     public class BoltwoodClass : BoltwoodFields
     {
 
-        internal DateTime LastMeasure;      //DateTime when last was measured
+        public DateTime LastMeasure;      //DateTime when last was measured
         internal bool RainNowEvent_Flag = false;  //internal field set that it is raining right now
         internal bool WetNowEvent_Flag = false;   //internal field set that it is wet right now
 
@@ -246,8 +246,8 @@ namespace WeatherControl
         public DateTime Bolt_WetFlag_LastDetected; //last time Wet was detected
         internal UInt16 Bolt_WetFlag_sinceLastDetected = 65535; //sec passed since
 
-        internal double Bolt_CloudIdx = -100; //Caclulated cloud idx
-        internal double Bolt_CloudIdxAAG = -100; //Caclulated cloud idx by AAG
+        public double Bolt_CloudIdx = -100; //Caclulated cloud idx
+        public double Bolt_CloudIdxAAG = -100; //Caclulated cloud idx by AAG
 
         public decimalSeparatorType ForcedDecimalSeparator = decimalSeparatorType.useLocale; //decimal separator
 
